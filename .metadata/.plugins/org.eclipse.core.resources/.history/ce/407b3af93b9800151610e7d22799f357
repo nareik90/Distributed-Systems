@@ -1,5 +1,0 @@
-package vigenereCypherBreaker;
-
-public interface VigenereBreaker {
-
-}
