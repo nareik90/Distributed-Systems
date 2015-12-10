@@ -1,6 +1,5 @@
 package ie.gmit.sw;
 
-
 public class Vigenere { //Blaise de Vigenere is (incorrectly) accredited with inventing this encryption mechanism
 	private char[] key; //Store the cypher key as a char array for convenience
 	
@@ -99,7 +98,7 @@ public class Vigenere { //Blaise de Vigenere is (incorrectly) accredited with in
 			if (text[i] < 'A' || text[i] > 'Z') continue;
 			
 			int j = 0;
-			if (i < key.length) j = i;
+			if (j > key.length) j = 0;
 			
 			if(encrypt){
 				buffer.append(getEncryptedCharacter(key[j], text[i]));
@@ -117,12 +116,11 @@ public class Vigenere { //Blaise de Vigenere is (incorrectly) accredited with in
 	}
 	
 	public static void main(String[] args) {
-		Vigenere v = new Vigenere("JAVAP");
-		String cypherTxt = v.doCypher("ANTIDISESTABLISHMENTARIANISM", true);
+		Vigenere v = new Vigenere("test");
+		String cypherTxt = v.doCypher("Testing", true);
 		System.out.println(cypherTxt);
 		
 		String plainTxt = v.doCypher(cypherTxt, false);
 		System.out.println(plainTxt);
-		
 	}
 }
