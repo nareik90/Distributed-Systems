@@ -7,9 +7,8 @@ public class KeyEnumerator {
 	private float highestScore = 0;
 	private String closestKey;
 	
-	public KeyEnumerator() throws Exception
-	{
-		map = new QuadgramMap("./stuff.txt");
+	public KeyEnumerator(String filename) throws Exception {
+		map = new QuadgramMap(filename);
 	}
 	
 	private char[] getNextKey(char[] key)
@@ -60,8 +59,8 @@ public class KeyEnumerator {
 		return yahoo;
 	}
 	
-	public static void main(String[] args) throws Exception 
+	/*public static void main(String[] args) throws Exception 
 	{
 		new KeyEnumerator().crackCypher("MXLMBGZ", 5);
-	}
+	}*/
 }
