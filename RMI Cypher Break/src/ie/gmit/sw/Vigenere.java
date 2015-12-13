@@ -88,10 +88,6 @@ public class Vigenere { //Blaise de Vigenere is (incorrectly) accredited with in
 		return cypher;
 	}
 
-	
-	/* The duplication in the encrypt() and decrypt() methods invites us to optimise and
-	 * simplify the class, by combining their functionality in a new method called doCypher()
-	 */
 	public String doCypher(char[] text, boolean encrypt) {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < text.length; i++) {

@@ -65,7 +65,7 @@ public class QuadgramMap
 		//System.out.println(map); //print map in main method
 	}
 	
-	//mainclass to see if map is filling
+	//main class to see if map is filling
 	/*public static void main(String[] args) throws Exception 
 	{
 		new QuadgramMap("./stuff.txt");
