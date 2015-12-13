@@ -1,11 +1,14 @@
 package ie.gmit.sw;
 
 import java.io.*;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import java.rmi.Naming;
 
+@SuppressWarnings("unused")
 public class CrackerHandler extends HttpServlet {
 	
 	/**
@@ -14,6 +17,7 @@ public class CrackerHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String remoteHost = null;
 	private static long jobNumber = 0;
+
 
 	public void init() throws ServletException {
 		ServletContext ctx = getServletContext();
@@ -28,18 +32,31 @@ public class CrackerHandler extends HttpServlet {
 		int maxKeyLength = Integer.parseInt(req.getParameter("frmMaxKeyLength"));
 		String cypherText = req.getParameter("frmCypherText");
 		String taskNumber = req.getParameter("frmStatus");
+		String result = "";
 
 
 		out.print("<html><head><title>Distributed Systems Assignment</title>");		
 		out.print("</head>");		
 		out.print("<body>");
+
 		
 		if (taskNumber == null){
-			taskNumber = new String("T" + jobNumber);
-			jobNumber++;
 			//Add job to in-queue
+			taskNumber = new String("T" + jobNumber);
+			jobNumber++;	
+			
+			
 		}else{
 			//Check out-queue for finished job
+		}
+		
+		try {
+			VigenereBreaker vb = (VigenereBreaker) Naming.lookup("cypher-service");
+			result = vb.decrypt(cypherText,  maxKeyLength);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
@@ -51,6 +68,7 @@ public class CrackerHandler extends HttpServlet {
 		out.print("RMI Server is located at " + remoteHost);
 		out.print("<P>Maximum Key Length: " + maxKeyLength);		
 		out.print("<P>CypherText: " + cypherText);
+		out.print("<P>Result: " + result);
 		out.print("<P>This servlet should only be responsible for handling client request and returning responses. Everything else should be handled by different objects.");
 		out.print("<P>Note that any variables declared inside this doGet() method are thread safe. Anything defined at a class level is shared between HTTP requests.");				
 
@@ -99,9 +117,12 @@ public class CrackerHandler extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		doGet(req, resp);
  	}
+	
+	public static void main(String[] args) {
+		System.out.println("Sneeze");
+	}
 
-	
-	
 }
