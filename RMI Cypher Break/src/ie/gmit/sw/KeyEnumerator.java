@@ -59,8 +59,9 @@ public class KeyEnumerator {
 		return yahoo;
 	}
 	
-	/*public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		//test to see if it will decipher 
-		new KeyEnumerator("./WarAndPeace.txt").crackCypher("MABLBLMAXNEMBFTMXMXLMHYYTMX", 5);
-	}*/
+//		new KeyEnumerator("./WarAndPeace.txt").crackCypher("MABLBLMAXNEMBFTMXMXLMHYYTMX", 5);
+		new KeyEnumerator("./WarAndPeace.txt").crackCypher("GTBWULGJAWFLWVSKKAYFEWFL", 5);
+	}
 }
